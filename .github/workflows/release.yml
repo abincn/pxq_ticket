@@ -28,11 +28,13 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Update Cargo Dependencies
+      - name: Install cargo-edit
         run: |
-          cargo update -p time --precise 0.3.35 || true
           cargo install cargo-edit
-          cargo add --upgrade time@0.3.35
+
+      - name: Add/Update time crate to 0.3.35
+        run: |
+          cargo add time@0.3.35
 
       - name: Install System Dependencies (Linux)
         if: matrix.platform == 'ubuntu-latest'
